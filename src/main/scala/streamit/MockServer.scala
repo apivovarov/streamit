@@ -43,7 +43,8 @@ class GenData(val s: Socket) extends Runnable {
       val pw = new PrintWriter(os, true)
       val rnd = new Random()
       while (!pw.checkError()) {
-        val v = rnd.nextInt(1000000)
+        val sig = if (rnd.nextBoolean()) 1 else -1
+        val v = rnd.nextInt(1000000) * sig
         pw.println(v)
         Thread.sleep(100)
       }
